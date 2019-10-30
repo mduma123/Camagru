@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel = "stylesheet" type = "text/css"  href="style.css">
+<link rel = "stylesheet" type = "text/css"  href="css/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <style>
@@ -17,7 +17,7 @@ body
 <body>
     <p style="text-align:center;font-size:60px; color:green;">Welcome To Camagru<br> Click on the link below to Login or Sign Up</p><br>
 </div>
-    <center><a style="font-size:30px;" class="btn btn-default btn-lg" href="login.html"><i>Login or Sign up</i></a></center>
+    <center><a style="font-size:30px;" class="btn btn-default btn-lg" href="register/login_reg.php"><i>Login or Sign up</i></a></center>
 </div>
 <img src="https://ak0.picdn.net/shutterstock/videos/2192350/thumb/1.jpg"; style="width:600px;height:400px;" ;align="left">
 </div>
