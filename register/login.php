@@ -5,7 +5,7 @@ session_start();
 
 if(!empty($_SESSION['user'])) 
 {
-      header('location:../index.php');
+      header('location:../Gallery.php');
 }
 require '../database.php';
 
@@ -36,10 +36,11 @@ if (isset($_POST["submit"])) {
                           //when you are successfully logged in start the session and create a session variable that stores users email
                           session_start();
                           
-                          $getComments = $connection->prepare("SELECT name, password, email, verified FROM users WHERE name='$name' AND email='$email' AND password='$password' AND verified= 1;");
+                          $getComments = $connection->prepare("SELECT *  FROM users WHERE name='$name' AND email='$email' AND password='$password' AND verified= 1;");
                           $getComments->execute();
                           $users = $getComments->fetchAll();
                           $_SESSION['name'] = implode($users);
+                          $_SESSION['id'] = implode($users);;
                           header("location:../Gallery.php");
                       }
                       //alert if email has not been verified

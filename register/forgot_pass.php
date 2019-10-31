@@ -120,7 +120,7 @@ require_once "../database.php";
 					length.classList.remove("valid");
 					length.classList.add("invalid");
 				}
-				//valid and invalid style is in other.css
+				//valid and invalid style is in style.css
 			}
 		</script>
 	</body>

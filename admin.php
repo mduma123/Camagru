@@ -8,12 +8,12 @@
     require_once "database.php";
 	$email = $_SESSION['id'];
 	$mail = trim($_POST['email']);
-    $username = trim($_POST['username']);
-    $pass = sha1(trim($_POST['pass']));
+    $name = trim($_POST['name']);
+    $password = sha1(trim($_POST['pass']));
     //reset password updating your password in the database
         if(isset($_POST['resetP'])){
-        if($pass){
-            $sql=$connection->prepare("update `users` set password='$pass' where email='$email'");
+        if($password){
+            $sql=$connection->prepare("update `users` set password='$password' where email='$email'");
 		    $sql->execute();
             $alert = "<h5 style='text-align:center;' class='text-default'>Password reset</h5>";
         }
@@ -21,7 +21,7 @@
     //reset username updating your new username in the database
         if(isset($_POST['resetU'])){
         if($username){
-            $sql=$connection->prepare("update `users` set username='$username' where email='$email'");
+            $sql=$connection->prepare("update `users` set name='$name' where email='$email'");
 		    $sql->execute();
             $alert = "<h5 style='text-align:center;' class='text-default'>Username reset</h5>";
 		}
@@ -54,7 +54,7 @@
 			<div style="position:absolute; right:2%;">
 				<a class="navbar-nav" href="Gallery.php" style="margin:16px 5px">Gallery</a>
 				<a class="navbar-nav" href="capture_upload.php" style="margin:16px 5px;">Capture or Upload </a>
-				<a class="navbar-nav" href="registration/logout.php" style="margin:16px 0px">Logout <?php echo $_SESSION['id']?></a>
+				<a class="navbar-nav" href="register/logout.php" style="margin:16px 0px">Logout <?php echo $_SESSION['id']?></a>
 			</div>
         </nav>
         <h1 id="adminH">Change your username, password or email</h1>
@@ -163,7 +163,7 @@
 					length.classList.remove("valid");
 					length.classList.add("invalid");
 				}
-				//valid and invalid style is in other.css
+				//valid and invalid style is in style.css
 			}
 		</script>
 </body>

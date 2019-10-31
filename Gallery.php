@@ -98,12 +98,12 @@
     <body>
         <nav class="navbar navbar-light">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Camagru by johnson</a>
+                <a class="navbar-brand" href="#">Camagru by Mxolisi</a>
             </div>
             <div style="position:absolute; right:5%;">
                <a class="navbar-nav" href="capture_upload.php" style="margin:16px 5px;">Capture or Upload </a> 
                <a class="navbar-nav" href="admin.php" style="margin:16px 5px;">Modify your details</a> 
-               <a class="navbar-nav" href="registration/logout.php" style="margin:16px 5px;">Logout <?php echo $_SESSION['id']?></a>
+               <a class="navbar-nav" href="register/logout.php" style="margin:16px 5px;">Logout <?php echo $_SESSION['id']?></a>
             </div>
         </nav>
         <h1 style="text-align:center;">Gallery</h1>
