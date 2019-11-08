@@ -3,9 +3,10 @@
     session_start();
     //This page is only accessible if you're logged in
     if (!isset($_SESSION['id'])){
-        header("location:register/login_reg.php");
+        header("location:/register/login.php");
     }
     //When the upload button is clicked the image is uploaded into the uploads file. Only jpg, png and gif extensions are accepted.
+    $alert = "";
     if (isset($_POST['upload'])){
         $file = $_FILES['image'];
         $extensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -35,7 +36,6 @@
         <title>Camagru</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-       
     </head>
     <body>
         <nav class="navbar navbar-default navbar-expand-lg">
@@ -54,8 +54,8 @@
                     <!-- Live video image-->
                     <video id="video" autoplay></video>
                     <p>
-                        <!-- When Capture button is clicked it takes a snapshot of the video-->
-                        <button id="snap" class="btn btn-default">Capture</button>
+                        <!-- When snap button is clicked it takes a snapshot of the video-->
+                        <button id="snap" class="btn btn-default">Take Snapshot</button>
                         <!-- When button is clicked the uploadEx function is called which takes the snapshot and uploads it to the uploads file-->
                         <button onclick="uploadEx()" id="new" class="btn btn-default">Save and Upload</button>
                         <form method="post" accept-charset="utf-8" name="form1">
@@ -85,15 +85,18 @@
                     the default image(handtinywhite.gif). When you select an option (onchange) the image source will change to option you
                     have selected which will change the below img as well as add the src to your second canvas image below.
                     -->
-                    <img class="img1" height="200" width="300" src="test_images/handtinywhite.gif">
+                    <img class="img1" height="200" width="300" src="">
                     <select id="dropdown" onchange="setPicture(this)">
-                        <option value="test_images/close.gif">None</option>
-                        <option value="test_images/Ball.png">Soccer</option>
-                        <option value="test_images/Flower.png">Flower</option>
-                        <option value="test_images/Juve.png">Juventus</option>
-                        <option value="test_images/Kaizer.png">Chiefs</option>
-                        <option value="test_images/Man_U.png">ManU</option>
-                        <option value="test_images/loupe.png">loupe</option>
+                   
+                        <option value="Test_images/enjoy.gif">None</option>
+                        <option value="Test_images/arnold.png">Arnold</option>
+                        <option value="Test_images/camel.png">Camel</option>
+                        <option value="Test_images/croc.png">Crocodile</option>
+                        <option value="Test_images/eagle.png">Eagle</option>
+                        <option value="Test_images/wendigo.png">China</option>
+                        <option value="Test_images/monkey.png">Monkey</option>
+                        <option value="Test_images/plastic.png">Monkey</option>
+                        <option value="Test_images/tengu.png">Tengu</option>
                     </select>
                 </div>
             </div>
@@ -131,12 +134,14 @@
                     var DD = document.getElementById('dropdown');
                     var value = DD.options[DD.selectedIndex].value;
                     img1.src = value;
+
                 }
                 //when the screenshot button is clicked a canvas image is created from the video feed and img1 is added on the top
                 screenShotButton.onclick = video.onclick = function(){
                     canvas.width = video.videoWidth;
                     canvas.height = video.videoHeight;
                     var context = canvas.getContext('2d');
+
                     context.globalAlpha = 1.0;
                     context.drawImage(video, 0, 0);
                     context.globalAlpha = 1.0;
@@ -150,13 +155,16 @@
                     video.srcObject = stream;
                 }
                 var url = canvas.toDataURL();
+
                 //Function uses ajax to send image data to upload_data.php
                 function uploadEx(){
                     var dataURL = canvas.toDataURL("image/png");
                     document.getElementById('hidden_data').value = dataURL;
                     var fd = new FormData(document.forms["form1"]);
+
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', 'upload.php', true);
+
                     xhr.upload.onprogress = function(e){
                         if (e.lengthComputable) {
                             var percentComplete = (e.loaded /e.total) * 100;
@@ -165,8 +173,8 @@
                         }
                     };
                     xhr.send(fd);
+
                 }
         </script>
     </body>
-    
 </html>

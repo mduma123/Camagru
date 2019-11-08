@@ -2,6 +2,7 @@
     session_start();
     require_once("database.php");
     //When a user comments on a photo insert the comment into the database and send an email to the user whose photo it is
+    $alert = "";
     if (isset($_POST['comment'])){
         $user = $_SESSION['id'];
         $img = $_POST['imageN'];
@@ -15,9 +16,9 @@
         }
         
         //insert comments into database
-      //  $comment = $_POST['content'].PHP_EOL;
-     //   $sql=$connection->prepare("INSERT INTO comment (user,img, comment) VALUES ('$user','$img','$comment');");
-      //  $sql->execute();
+       $comment = $_POST['content'].PHP_EOL;
+       $sql=$connection->prepare("INSERT INTO comment (user,img, comment) VALUES ('$user','$img','$comment');");
+       $sql->execute();
         //send email to user
         $headers = 'FROM:Camagru';
 		$message = " 
@@ -56,14 +57,15 @@
         
         //insert comments into database
         $comment = $_POST['liked'].PHP_EOL;
-      //  $sql=$connection->prepare("INSERT INTO comment (user,img, comment) VALUES ('$user','$img','$comment');");
-       // $sql->execute();
+       $sql=$connection->prepare("INSERT INTO comment (user,img, comment) VALUES ('$user','$img','$comment');");
+       $sql->execute();
         //send email to user
         $headers = 'FROM:Camagru';
 		$message = " 
 			
 		Someone liked your photo";
         
+
 		mail("$Email", "Someone liked your photo", "$message", "$headers");
     }
     //once clicked decrements article likes in your database
@@ -123,12 +125,14 @@
                         <input type="hidden" name="imageN" value="'.$image.'">
                         <button class="btn btn-info center-block" type="submit" name="comment">Comment</button>
                         </form>
+
                         <form method="post" action="Gallery.php">
                         <button id="like" style="margin-top:10px;" class="btn btn-danger center-block" name="delete" type="submit"> DELETE</button>
                         <input type="hidden" name="imageN" value="'.$image.'">
                         <button id="like" style="margin-top:10px;" class="btn btn-primary center-block" name="liked" type="submit"><i class="glyphicon glyphicon-thumbs-up"></i> LIKE</button>
                     
                         </form>
+
                     ';
                     //get likes from the database and add each comment is added to the image.
                     $getComments = $connection->prepare("SELECT * FROM image");
@@ -155,3 +159,4 @@
                 echo $alert
             ?>
             </div>
+<?php require 'head_foot/footer.php' ?>

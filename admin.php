@@ -4,16 +4,17 @@
 	//only able to access this page if you're logged in
     if (!isset($_SESSION['id'])){
         header("location:/register/login.php");
-    }
-    require_once "database.php";
+	}
+	$alert = "";
+	require_once "database.php";
 	$email = $_SESSION['id'];
 	$mail = trim($_POST['email']);
-    $name = trim($_POST['name']);
-    $password = sha1(trim($_POST['pass']));
+    $username = trim($_POST['username']);
+    $pass = sha1(trim($_POST['pass']));
     //reset password updating your password in the database
         if(isset($_POST['resetP'])){
-        if($password){
-            $sql=$connection->prepare("update `users` set password='$password' where email='$email'");
+        if($pass){
+            $sql=$connection->prepare("update `users` set password='$pass' where email='$email'");
 		    $sql->execute();
             $alert = "<h5 style='text-align:center;' class='text-default'>Password reset</h5>";
         }
@@ -21,7 +22,7 @@
     //reset username updating your new username in the database
         if(isset($_POST['resetU'])){
         if($username){
-            $sql=$connection->prepare("update `users` set name='$name' where email='$email'");
+            $sql=$connection->prepare("update `users` set username='$username' where email='$email'");
 		    $sql->execute();
             $alert = "<h5 style='text-align:center;' class='text-default'>Username reset</h5>";
 		}
@@ -29,7 +30,7 @@
 	//reset email updating your new email in the database
 		if(isset($_POST['resetE'])){
 			if($email){
-				$sql=$connection->prepare("update `users` set email='$mail' where email='$email'");
+				$sql=$connection->prepare("update `users` set email='$email' where email='$email'");
 				$sql->execute();
 				$email = $mail;
 				$alert = "<h5 style='text-align:center;' class='text-default'>Email reset</h5>";
@@ -43,8 +44,9 @@
         <title>Camagru</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="css/boot.css">
+        <link rel="stylesheet" href="css/log_sign.css">
+		<link rel="stylesheet" href="css/other.css">
+		<link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <nav class="navbar navbar-light">
@@ -113,6 +115,7 @@
 			var capital = document.getElementById("capital");
 			var number = document.getElementById("number");
 			var length = document.getElementById("length");
+
 			//when an input field is clicked on(onfocus), display id=message
 			myInput.onfocus = function() {
 				document.getElementById("message").style.display = "block";
@@ -123,6 +126,7 @@
 				document.getElementById("message").style.display = "none";
 			}
 			/*when a user releases a key
+
 			*/
 			myInput.onkeyup = function() {
 				//find any of the characters between the brackets and add to variable

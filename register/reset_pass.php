@@ -1,5 +1,5 @@
 <!-- On the login page you have a link that allows you to reset your password. When you click the link you're taken to the reset page where you would type in your email 
-a link is sent to your email that directs you to forgot.php -->
+a link is sent to your email that directs you to forgot_pass.php -->
 <?php
 	require_once "../database.php";
 	if (isset($_POST['reset'])){
@@ -14,8 +14,9 @@ a link is sent to your email that directs you to forgot.php -->
 			$message = " 
 			Please click on the link below to reset your password
 			
-			http://127.0.0.1:8080/Camagru_/register/forgot_pass.php?email=$email";
+			http://127.0.0.1:8080/Camagru1/register/forgot_pass.php?email=$email";
 			
+
 			mail("$email", "Verify Camagru account", "$message", "$headers");
 			$alert = "<h5>Check your email</h5>";
 		}
@@ -32,7 +33,7 @@ a link is sent to your email that directs you to forgot.php -->
         <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="post" action="reset.php">
+				<form class="login100-form validate-form" method="post" action="reset_pass.php">
 					<span class="login100-form-title p-b-43">
 						Type in your email and we'll send you a reset link.
 					</span>
@@ -43,16 +44,19 @@ a link is sent to your email that directs you to forgot.php -->
 						<span class="label-input100">Email</span>
 					</div>
 					<span class="login100-form-title p-b-43">
-						Go back to <a href="login_reg.php">Login</a>
+						Go back to <a href="login.php">Login</a>
 					</span>
                     <div class="container-login100-form-btn">
 						<button style="margin-bottom:40px" class="login100-form-btn" type="submit" name="reset">
 							Reset
 						</button>
-						<?php echo $alert?>
+						<?php 
+						$alert = "";
+						echo $alert?>
 					</div>
 					</div>
                 </form>
 			</div>
 		</div>
 	    </div>
+<?php require '../head_foot/footer.php' ?>

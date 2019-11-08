@@ -1,32 +1,32 @@
 <?php
     //create the database if it does not already exist
-	$sql = "CREATE DATABASE IF NOT EXISTS Camagru_";
+	$sql = "CREATE DATABASE IF NOT EXISTS Camagru";
     $connection->exec($sql);
     //connect to the database db_cam
-    $sql = "USE Camagru_";
+    $sql = "USE Camagru";
     $connection->exec($sql);
     //create table users (where the users sign up information is stored)
     $sql = "CREATE TABLE IF NOT EXISTS users (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        name varchar(255) NOT NULL,
+        username varchar(255) NOT NULL,
         email varchar(255) NOT NULL,
         password varchar(255) NOT NULL,
         verified INT(11)
     )";
     $connection->exec($sql);
     //create table comments.
-    $sql = "CREATE TABLE IF NOT EXISTS comments (
+    $sql = "CREATE TABLE IF NOT EXISTS comment (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
         user varchar(255) NOT NULL,
         img varchar(255) NOT NULL,
-        comments varchar(255) NOT NULL
+        comment varchar(255) NOT NULL
     )";
     $connection->exec($sql);
     //create like table
     $sql = "CREATE TABLE IF NOT EXISTS likes (
         id INT(11) AUTO_INCREMENT PRIMARY KEY,
-        user_id INT(11),
-        img_id varchar(255)
+        userid INT(11),
+        imgid varchar(255)
     )";
     $connection->exec($sql);
     //create img table (name of the image and the user it belongs to. As well as where the like are stored)
